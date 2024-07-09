@@ -59,7 +59,7 @@ spotLight5.shadow.bias = -0.0001;
 scene.add(spotLight5);
 
 const gltfLoader = new GLTFLoader();
-const url = "/porsche_911_turbo_s__takeover/scene.gltf";
+const url = "public/porsche_911_turbo_s__takeover/scene.gltf";
 gltfLoader.load(url, (gltf) => {
   const root = gltf.scene;
   root.traverse((child) => {
