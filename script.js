@@ -1,6 +1,7 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161/build/three.module.js";
 import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.161/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.161/examples/jsm/loaders/GLTFLoader.js";
+import { TrackballControls } from "https://cdn.jsdelivr.net/npm/three@0.161/examples/jsm/controls/TrackballControls.js";
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -17,7 +18,10 @@ renderer.setPixelRatio(window.devicePixelRatio);
 
 document.body.appendChild(renderer.domElement);
 
+
+
 const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableZoom = false;
 controls.enableDamping = true;
 controls.dampingFactor = 0.06;
 controls.enablePan = false;
@@ -28,6 +32,13 @@ controls.maxPolarAngle = 1.5;
 controls.autoRotate = false;
 controls.target = new THREE.Vector3(0, 1, 0);
 controls.update();
+
+
+const controls2 = new TrackballControls(camera, renderer.domElement);
+controls2.noRotate = true;
+controls2.noPan = true;
+controls2.noZoom = false;
+controls2.zoomSpeed = 5;
 
 const groundGeometry = new THREE.PlaneGeometry(20, 20, 32, 32);
 groundGeometry.rotateX(-Math.PI / 2);
@@ -75,9 +86,14 @@ gltfLoader.load(url, (gltf) => {
 //ambientLight
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(ambientLight);
+const ambientLight2 = new THREE.AmbientLight(0xffffff);
+scene.add(ambientLight2);
 
 function animate() {
   requestAnimationFrame(animate);
+  const target = controls.target;
+  controls2.target.set(target.x,target.y,target.z)
+  controls2.update();
   controls.update();
   renderer.render(scene, camera);
 }
