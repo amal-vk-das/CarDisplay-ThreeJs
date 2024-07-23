@@ -71,6 +71,7 @@ scene.add(spotLight5);
 
 const gltfLoader = new GLTFLoader();
 const url = "public/porsche_911_turbo_s__takeover/scene.gltf";
+// const url = "public/porsche/scene.gltf";
 gltfLoader.load(url, (gltf) => {
   const root = gltf.scene;
   root.traverse((child) => {
