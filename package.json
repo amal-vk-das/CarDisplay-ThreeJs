@@ -15,7 +15,8 @@
   },
   "scripts": {
     "dev":"vite",
-    "build":"vite build"
+    "deploy":"vercel --prod"
+
   },
   "keywords": [],
   "author": "",
